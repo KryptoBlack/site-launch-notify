@@ -1,0 +1,14 @@
+name = "site-launch-notify"
+main = "src/index.ts"
+compatibility_date = "2023-02-05"
+usage_model = "bundled"
+env = { }
+
+[triggers]
+crons = [ ]
+
+[[ d1_databases ]]
+
+binding = "DB"
+database_name = "site-launch-notify"
+database_id = "5f08f32e-51f4-4fee-b801-1ff5614d3418"
