@@ -7,8 +7,8 @@ env = { }
 [triggers]
 crons = [ ]
 
-[[ d1_databases ]]
-
+[[d1_databases]]
 binding = "DB"
 database_name = "site-launch-notify"
 database_id = "5f08f32e-51f4-4fee-b801-1ff5614d3418"
+preview_database_id = "c20a11bd-db23-4342-a6ab-e130668a864e"

@@ -6,23 +6,20 @@ export interface Env {
     __router?: any;
 }
 
-interface Body {
-    email: string
-}
-
 export default {
     async fetch(request: Request, env: Env): Promise<Response> {
         if (!env.__router) {
             const router = Router();
             router.post('/', async () => {
-                const { email } = await request.json<Body>();
+                const email = (await request.formData()).get("email");
                 if (!email) return new Response("email not provided", { status: 400 })
 
-                const exist = await env.DB.prepare(`select id from subscription where email=?`)
+                const check = await env.DB.prepare(`select id from subscription where email=?`)
                     .bind(email)
-                    .all()
+                    .all();
 
-                if (exist) return new Response("Already Exist")
+                // email already exists
+                if (check && check.results && check.results.length > 0) return new Response("Already Exist")
 
                 const sender = request.headers.has("X-forwarded-for") ? request.headers.get("X-forwarded-for") : request.headers.get("Origin");
                 const res = await env.DB.prepare(`
